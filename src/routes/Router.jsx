@@ -3,9 +3,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ROUTES } from "./Routes";
 import PageNotFound from "../components/PageNotFound";
-import ReduxMain from "../pages/redux/ReduxMain";
-import ProductDescription from "../pages/redux/ProductDescription";
+import ReduxMain from "../components/ReduxMain";
+import ProductDescription from "../components/ProductDescription";
 import Cart from "../components/Cart";
+import Login from "../components/Login";
 
 const App = React.lazy(() => import("../App"));
 const ContextWithReducer = React.lazy(() =>
@@ -43,6 +44,10 @@ const Router = () => {
             {
               path: ROUTES.CART,
               element: <Cart />
+            },
+            {
+              path: ROUTES.LOGIN,
+              element: <Login />
             }
           ]
         },

@@ -3,5 +3,6 @@ export const ROUTES = {
   CONTEXT: "/context",
   REDUX: "/redux",
   PRODUCT: ":id",
-  CART: 'cart'
+  CART: 'cart',
+  LOGIN: 'login'
 };

@@ -5,9 +5,17 @@ import Products from './Products';
 const Cart = () => {
     const cartProducts = useSelector(selectAllProducts);
 
+    const cartTotal = cartProducts.reduce((prev, next) => {
+        return prev + next.price
+    }, 0)
+
     return (
         <div className='cart'>
-            <Products products={cartProducts} />
+            <h4>Cart ({cartProducts?.length})</h4>
+            <Products products={cartProducts} inCartPage={true} />
+            {cartProducts?.length > 0 ? (<h4>
+                Cart Total: Rs. {cartTotal}
+            </h4>) : 'No products in the cart'}
         </div>
     )
 }

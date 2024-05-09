@@ -1,6 +1,6 @@
 const ErrorDisplay = () => {
     return (
-        <div className="loader">
+        <div className="error">
             Error....
         </div>
     )

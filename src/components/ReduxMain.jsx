@@ -1,17 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
-import Button from "../../components/utils/Button";
+import Button from "./utils/Button";
 
-import { getProductsThunk } from "../../store/redux/productsReducer";
+import { getProductsThunk } from "../store/redux/productsReducer";
 import { useEffect } from "react";
 
 import {
   selectAllProducts,
   isLoading,
   hasError,
-} from "../../store/redux/productsSelectors";
-import Loader from "../../components/utils/Loader";
-import ErrorDisplay from "../../components/utils/ErrorDisplay";
-import Products from "../../components/Products";
+} from "../store/redux/productsSelectors";
+import Loader from "./utils/Loader";
+import ErrorDisplay from "./utils/ErrorDisplay";
+import Products from "./Products";
 
 const ReduxMain = () => {
   const dispatch = useDispatch();

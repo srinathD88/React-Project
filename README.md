@@ -1,3 +1,3 @@
-Clone repo
-npm install
-npm run dev
+1. Clone repo
+2. npm install
+3. npm run dev

@@ -39,8 +39,16 @@ const ProductDescription = () => {
   useEffect(() => {
     dispatch(getProductThunk(productId));
   }, []);
+
+  useEffect(() => {
+    if(product) {
+      document.title = product.title;
+    } 
+    return;
+  }, [product]);
+
   return (
-    <div>
+    <div className="product-description">
       {loading && <Loader />}
       {!loading && error && <ErrorDisplay />}
       {!loading && product && (

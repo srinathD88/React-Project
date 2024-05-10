@@ -1,9 +1,18 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useMemo, useReducer, useState } from "react";
 
 import { PostsReducer } from "./PostsReducer";
 import { initialState } from "../initialState";
 
-export const PostsContext = createContext();
+const defaultValue = {
+  state: initialState,
+  showForm: false,
+  editPost: null,
+  updateStore: () => undefined,
+  toggleForm: () => undefined,
+  editPostForm: () => undefined,
+};
+
+export const PostsContext = createContext(defaultValue);
 
 const PostsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(PostsReducer, initialState);
@@ -16,20 +25,22 @@ const PostsProvider = ({ children }) => {
 
   const toggleForm = (val) => {
     setShowForm(val);
-  }
+  };
 
   const editPostForm = (post) => {
     setEditPost(post);
-  }
-
-  const value = {
-    state,
-    updateStore,
-    showForm,
-    toggleForm,
-    editPost,
-    editPostForm
   };
+
+  const value = useMemo(() => {
+    return {
+      state,
+      updateStore,
+      showForm,
+      toggleForm,
+      editPost,
+      editPostForm,
+    };
+  }, [state, showForm, editPost]);
 
   return (
     <PostsContext.Provider value={value}>{children}</PostsContext.Provider>

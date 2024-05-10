@@ -12,8 +12,9 @@ import {
 import Loader from "./utils/Loader";
 import ErrorDisplay from "./utils/ErrorDisplay";
 import Products from "./Products";
+import { withPageTitle } from "./hoc/withPageTitle";
 
-const ReduxMain = () => {
+const ReduxMainBase = () => {
   const dispatch = useDispatch();
   const [products, loading, error] = [
     useSelector(selectAllProducts),
@@ -34,4 +35,5 @@ const ReduxMain = () => {
   );
 };
 
+const ReduxMain = withPageTitle(ReduxMainBase, 'Products base')
 export default ReduxMain;

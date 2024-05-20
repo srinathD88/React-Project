@@ -11,7 +11,7 @@ const Redux = () => {
       <BackToHome />
       <h2>Redux</h2>
       <Provider store={store}>
-      <ProductsNavBar />
+        <ProductsNavBar />
         <Outlet />
       </Provider>
     </div>

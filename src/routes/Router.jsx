@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ROUTES } from "./Routes";
 import PageNotFound from "../components/utils/PageNotFound";
+import { prodLoader } from "../components/ProductDescription";
 
 const App = React.lazy(() => import("../App"));
 const ContextWithReducer = React.lazy(() =>
@@ -11,7 +12,9 @@ const ContextWithReducer = React.lazy(() =>
 const Redux = React.lazy(() => import("../pages/redux/Redux"));
 const Home = React.lazy(() => import("../pages/home/Home"));
 const ReduxMain = React.lazy(() => import("../components/ReduxMain"));
-const ProductDescription = React.lazy(() => import("../components/ProductDescription"));
+const ProductDescription = React.lazy(() =>
+  import("../components/ProductDescription")
+);
 const Cart = React.lazy(() => import("../components/Cart"));
 const Login = React.lazy(() => import("../components/Login"));
 
@@ -24,6 +27,7 @@ const Router = () => {
         {
           path: ROUTES.HOME,
           element: <Home />,
+          index: true,
         },
         {
           path: ROUTES.CONTEXT,
@@ -34,22 +38,23 @@ const Router = () => {
           element: <Redux />,
           children: [
             {
-              index:true,
-              element: <ReduxMain />
+              index: true,
+              element: <ReduxMain />,
             },
             {
               path: ROUTES.PRODUCT,
-              element: <ProductDescription />
+              element: <ProductDescription />,
+              loader: ({ params }) => prodLoader(params),
             },
             {
               path: ROUTES.CART,
-              element: <Cart />
+              element: <Cart />,
             },
             {
               path: ROUTES.LOGIN,
-              element: <Login />
-            }
-          ]
+              element: <Login />,
+            },
+          ],
         },
       ],
     },

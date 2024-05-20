@@ -8,12 +8,13 @@ const Product = ({
   showAllDetails = false,
   inCart = false,
   inCartPage = false,
-  handleGoToCartClick
+  handleGoToCartClick,
 }) => {
   return (
     <div className="product">
       <img
         src={product.thumbnail}
+        alt={product.title}
         onClick={() => handleProductClick?.(product.id)}
       />
       <div className="product-details">
@@ -26,18 +27,21 @@ const Product = ({
         </div>
         {showAllDetails && <p>{product.description}</p>}
         <div className="product-actions">
-          {!inCartPage && !inCart && <Button
-            text="Add to Cart"
-            hadnleClick={() => handleCartBtnClick(product)}
-          />}
-          {!inCartPage && inCart && <Button
-            text='Go to Cart'
-            hadnleClick={handleGoToCartClick}
-          />}
-          {inCartPage && <Button
-            text='Remove From Cart'
-            hadnleClick={() => handleRemoveCartBtnClick(product.id)}
-          />}
+          {!inCartPage && !inCart && (
+            <Button
+              text="Add to Cart"
+              hadnleClick={() => handleCartBtnClick(product)}
+            />
+          )}
+          {!inCartPage && inCart && (
+            <Button text="Go to Cart" hadnleClick={handleGoToCartClick} />
+          )}
+          {inCartPage && (
+            <Button
+              text="Remove From Cart"
+              hadnleClick={() => handleRemoveCartBtnClick(product.id)}
+            />
+          )}
         </div>
       </div>
     </div>

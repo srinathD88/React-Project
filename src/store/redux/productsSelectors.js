@@ -1,3 +1,4 @@
+import { createSelector } from "@reduxjs/toolkit";
 import { productsAdapter } from "./productsReducer";
 
 export const {
@@ -8,14 +9,23 @@ export const {
   selectTotal: selectTotalProducts,
 } = productsAdapter.getSelectors((state) => state.products);
 
-export const isLoading = (state) => {
-  return state.products.loading;
+const loading = ({ products }) => {
+  return products.loading;
 };
 
-export const hasError = (state) => {
-  return state.products.error;
+const error = ({ products }) => {
+  return products.error;
 };
 
-export const selectedProduct = (state) => {
+const getSelectedProduct = (state) => {
   return state.products.selectedProduct;
 };
+
+export const isLoading = createSelector((state) => state, loading);
+
+export const hasError = createSelector((state) => state, error);
+
+export const selectedProduct = createSelector(
+  getSelectedProduct,
+  (state) => state
+);

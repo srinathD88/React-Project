@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import Button from "./utils/Button";
 
 import { getProductsThunk } from "../store/redux/productsReducer";
 import { useEffect } from "react";
@@ -7,7 +6,7 @@ import { useEffect } from "react";
 import {
   selectAllProducts,
   isLoading,
-  hasError,
+  hasError
 } from "../store/redux/productsSelectors";
 import Loader from "./utils/Loader";
 import ErrorDisplay from "./utils/ErrorDisplay";
@@ -19,9 +18,8 @@ const ReduxMainBase = () => {
   const [products, loading, error] = [
     useSelector(selectAllProducts),
     useSelector(isLoading),
-    useSelector(hasError),
+    useSelector(hasError)
   ];
-
 
   useEffect(() => {
     dispatch(getProductsThunk());

@@ -1,6 +1,6 @@
 const ErrorDisplay = () => {
     return (
-        <div className="error">
+        <div className="error" role="error-message">
             Error....
         </div>
     )

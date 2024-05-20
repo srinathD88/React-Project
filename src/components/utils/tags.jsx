@@ -1,8 +1,16 @@
-const TagsComp = ({tagsList, hadleClick}) => {
+const TagsComp = ({ tagsList, hadleClick }) => {
+  if (!tagsList?.length) return null;
+
   return (
     <div className="tags">
       {tagsList.map((tag, index) => (
-        <p key={index} onClick={() => hadleClick ? hadleClick(index) : false}>{tag}</p>
+        <p
+          role="tag"
+          key={index}
+          onClick={() => (hadleClick ? hadleClick(index) : false)}
+        >
+          {tag}
+        </p>
       ))}
     </div>
   );

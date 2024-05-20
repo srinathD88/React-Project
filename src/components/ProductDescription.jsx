@@ -11,22 +11,24 @@ import {
 import Loader from "./utils/Loader";
 import ErrorDisplay from "./utils/ErrorDisplay";
 import Product from "./Product";
-import { addToCart } from "../store/redux/cartReducer";
 import checkProductInCart from "./hooks/checkProductInCart";
 import { ROUTES } from "../routes/Routes";
 import cartAuth from "./hooks/cartAuth";
+import { useGetProductByIdQuery } from "../store/redux/productAPISlice";
 
 const ProductDescription = () => {
   const { id: productId } = useParams();
-  const dispatch = useDispatch();
+  const { data:product, isLoading:loading, error }  = useGetProductByIdQuery(productId);
+
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isProductInCart } = checkProductInCart();
   const {addProductToCart} = cartAuth();
-  const [product, loading, error] = [
-    useSelector(selectedProduct),
-    useSelector(isLoading),
-    useSelector(hasError),
-  ];
+  // const [product, loading, error] = [
+  //   useSelector(selectedProduct),
+  //   useSelector(isLoading),
+  //   useSelector(hasError),
+  // ];
 
   const handleCartBtnClick = (product) => {
     addProductToCart(product);
@@ -37,7 +39,7 @@ const ProductDescription = () => {
   }
 
   useEffect(() => {
-    dispatch(getProductThunk(productId));
+    // dispatch(getProductThunk(productId));
   }, []);
 
   useEffect(() => {
@@ -65,3 +67,8 @@ const ProductDescription = () => {
 };
 
 export default ProductDescription;
+
+export const prodLoader = ({id}) => {
+  console.log(id);
+  return id;
+}

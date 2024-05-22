@@ -11,7 +11,7 @@ const Product = ({
   handleGoToCartClick,
 }) => {
   return (
-    <div className="product">
+    <div className="product" role="product">
       <img
         src={product.thumbnail}
         alt={product.title}
@@ -19,7 +19,7 @@ const Product = ({
       />
       <div className="product-details">
         <div className="title">
-          <h3>{product.title}</h3>
+          <h3 role="product-title">{product.title}</h3>
           <p>
             Rs. {product.price}
             <small> ({product.discountPercentage}% off)</small>

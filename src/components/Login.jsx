@@ -25,11 +25,11 @@ const LoginBase = () => {
     <form onSubmit={handleLoginSubmit}>
       <div>
         <label htmlFor="name">Name</label>
-        <input type="text" name="name" />
+        <input type="text" name="name" placeholder="name" />
       </div>
       <div>
         <label htmlFor="password">Password</label>
-        <input type="password" name="password" />
+        <input type="password" name="password" placeholder="password" />
       </div>
       <div>
         <button type="submit">Submit</button>

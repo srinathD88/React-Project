@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import {
   selectAllProducts,
   isLoading,
-  hasError
+  hasError,
 } from "../store/redux/productsSelectors";
 import Loader from "./utils/Loader";
 import ErrorDisplay from "./utils/ErrorDisplay";
@@ -18,7 +18,7 @@ const ReduxMainBase = () => {
   const [products, loading, error] = [
     useSelector(selectAllProducts),
     useSelector(isLoading),
-    useSelector(hasError)
+    useSelector(hasError),
   ];
 
   useEffect(() => {
@@ -33,5 +33,5 @@ const ReduxMainBase = () => {
   );
 };
 
-const ReduxMain = withPageTitle(ReduxMainBase, 'Products base')
+const ReduxMain = withPageTitle(ReduxMainBase, "Products base");
 export default ReduxMain;

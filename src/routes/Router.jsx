@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "./Routes";
 import PageNotFound from "../components/utils/PageNotFound";
 import { prodLoader } from "../components/ProductDescription";
+import Click from "../components/Click";
 
 const App = React.lazy(() => import("../App"));
 const ContextWithReducer = React.lazy(() =>
@@ -18,49 +19,49 @@ const ProductDescription = React.lazy(() =>
 const Cart = React.lazy(() => import("../components/Cart"));
 const Login = React.lazy(() => import("../components/Login"));
 
-const Router = () => {
-  const router = createBrowserRouter([
-    {
-      element: <App />,
-      errorElement: <PageNotFound />,
-      children: [
-        {
-          path: ROUTES.HOME,
-          element: <Home />,
-          index: true,
-        },
-        {
-          path: ROUTES.CONTEXT,
-          element: <ContextWithReducer />,
-        },
-        {
-          path: ROUTES.REDUX,
-          element: <Redux />,
-          children: [
-            {
-              index: true,
-              element: <ReduxMain />,
-            },
-            {
-              path: ROUTES.PRODUCT,
-              element: <ProductDescription />,
-              loader: ({ params }) => prodLoader(params),
-            },
-            {
-              path: ROUTES.CART,
-              element: <Cart />,
-            },
-            {
-              path: ROUTES.LOGIN,
-              element: <Login />,
-            },
-          ],
-        },
-      ],
-    },
-  ]);
+const routerElemets = [
+  {
+    path: ROUTES.HOME,
+    element: <App />,
+    errorElement: <PageNotFound />,
+    children: [
+      {
+        element: <Home />,
+        index: true,
+      },
+      {
+        path: ROUTES.CONTEXT,
+        element: <ContextWithReducer />,
+      },
+      {
+        path: "click",
+        element: <Click />,
+      },
+      {
+        path: ROUTES.REDUX,
+        element: <Redux />,
+        children: [
+          {
+            index: true,
+            element: <ReduxMain />,
+          },
+          {
+            path: ROUTES.PRODUCT,
+            element: <ProductDescription />,
+            loader: ({ params }) => prodLoader(params),
+          },
+          {
+            path: ROUTES.CART,
+            element: <Cart />,
+          },
+          {
+            path: ROUTES.LOGIN,
+            element: <Login />,
+          },
+        ],
+      },
+    ],
+  },
+];
 
-  return <RouterProvider router={router} />;
-};
-
-export default Router;
+export default routerElemets;

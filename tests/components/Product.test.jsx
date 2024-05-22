@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Product from "../../src/components/Product";
-import { products } from "../data";
+import { products } from "../mocks/data";
 
 describe("Product", () => {
   const renderComponent = (newProps = {}) => {
@@ -18,8 +18,8 @@ describe("Product", () => {
 
     const props = { ...propsData, ...newProps };
     render(<Product {...props} />);
-    const btn = screen.getByRole("button");
-    const title = screen.getByRole("heading", { level: 3 });
+    const btn = () => screen.getByRole("button");
+    const title = () => screen.getByRole("product-title");
     const getDescription = () =>
       screen.getByText(new RegExp(products[0].description));
     const getImage = (altText) => screen.getByAltText(new RegExp(altText));
@@ -48,13 +48,13 @@ describe("Product", () => {
       handleProductClick,
     } = renderComponent();
 
-    expect(title).toHaveTextContent(product.title);
+    expect(title()).toHaveTextContent(product.title);
 
-    expect(btn).toHaveTextContent(/add/i);
+    expect(btn()).toHaveTextContent(/add/i);
 
     expect(getImage(product.title)).toBeInTheDocument();
 
-    await user.click(btn);
+    await user.click(btn());
 
     expect(handleCartBtnClick).toHaveBeenCalledWith(product);
 
@@ -71,15 +71,15 @@ describe("Product", () => {
 
   it("should update button text if product is in cart", () => {
     const { btn } = renderComponent({ inCart: true });
-    expect(btn).toHaveTextContent(/go to/i);
+    expect(btn()).toHaveTextContent(/go to/i);
   });
 
   it("should show remove cart from button if product is in cart page", async () => {
     const { btn, user, handleRemoveCartBtnClick, product } = renderComponent({
       inCartPage: true,
     });
-    expect(btn).toHaveTextContent(/Remove/i);
-    await user.click(btn);
+    expect(btn()).toHaveTextContent(/Remove/i);
+    await user.click(btn());
 
     expect(handleRemoveCartBtnClick).toHaveBeenCalledWith(product.id);
   });

@@ -1,14 +1,16 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import Login from "../../src/components/Login";
 import renderWithProviders from "../mocks/mock-redux";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { delay } from "msw";
 
 describe("Login", () => {
   const renderComponent = async (preloadedState) => {
+    const handleLoginSubmitSpy = vi.fn();
     const { store } = renderWithProviders(
       <BrowserRouter>
-        <Login />
+        <Login handleSubmit={handleLoginSubmitSpy} />
       </BrowserRouter>,
       {
         preloadedState: preloadedState,
@@ -18,29 +20,45 @@ describe("Login", () => {
     await screen.queryByRole("form");
 
     return {
+      store,
       user: userEvent.setup(),
+      formData: {
+        name: "testName",
+        password: "1234",
+      },
+      handleLoginSubmitSpy,
+      submitBtn: screen.getByRole("button", { name: /submit/i }),
     };
   };
 
+  it("should render with form and submit with empty data", async () => {
+    const { user, submitBtn } = await renderComponent();
+
+    await user.click(submitBtn);
+
+    expect(await screen.findByRole("error")).toBeInTheDocument();
+  });
+
   it("should render with form and enter values", async () => {
-    const { user } = await renderComponent();
+    const { user, formData, handleLoginSubmitSpy, submitBtn } =
+      await renderComponent();
 
     const nameInput = screen.getByRole("textbox", { placeholder: /name/i });
-    await user.clear(nameInput);
-    await user.type(nameInput, "testname");
+    const passwordInput = screen.getByLabelText(/password/i);
 
-    const passwordInput = screen.getByRole("textbox", {
-      placeholder: /password/i,
-    });
+    await user.clear(nameInput);
+    await user.type(nameInput, formData.name);
 
     await user.clear(passwordInput);
-    await user.type(passwordInput, "1234");
+    await user.type(passwordInput, formData.password);
 
-    console.log(nameInput.value);
-    console.log(passwordInput.value);
+    expect(nameInput).toHaveValue(formData.name);
+    expect(passwordInput).toHaveValue(formData.password);
 
-    expect(nameInput).toHaveValue("testname");
-    expect(passwordInput).toHaveValue("1234");
-    screen.debug();
+    await user.click(submitBtn);
+
+    expect(await screen.queryByRole("error")).not.toBeInTheDocument();
+
+    expect(handleLoginSubmitSpy).toHaveBeenCalledWith(formData);
   });
 });

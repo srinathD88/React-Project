@@ -1,10 +1,9 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { ROUTES } from "./Routes";
-import PageNotFound from "../components/utils/PageNotFound";
-import { prodLoader } from "../components/ProductDescription";
 import Click from "../components/Click";
+import { prodLoader } from "../components/ProductDescription";
+import PageNotFound from "../components/utils/PageNotFound";
+import { ROUTES } from "./Routes";
 
 const App = React.lazy(() => import("../App"));
 const ContextWithReducer = React.lazy(() =>
@@ -18,6 +17,7 @@ const ProductDescription = React.lazy(() =>
 );
 const Cart = React.lazy(() => import("../components/Cart"));
 const Login = React.lazy(() => import("../components/Login"));
+const Charts = React.lazy(() => import("../components/Charts"));
 
 const routerElemets = [
   {
@@ -32,6 +32,10 @@ const routerElemets = [
       {
         path: ROUTES.CONTEXT,
         element: <ContextWithReducer />,
+      },
+      {
+        path: ROUTES.CHARTS,
+        element: <Charts />,
       },
       {
         path: "click",

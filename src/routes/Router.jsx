@@ -18,6 +18,8 @@ const ProductDescription = React.lazy(() =>
 const Cart = React.lazy(() => import("../components/Cart"));
 const Login = React.lazy(() => import("../components/Login"));
 const Charts = React.lazy(() => import("../components/Charts"));
+const CoreCharts = React.lazy(() => import("../components/CoreCharts"));
+const MapCharts = React.lazy(() => import("../components/MapCharts"));
 
 const routerElemets = [
   {
@@ -36,6 +38,16 @@ const routerElemets = [
       {
         path: ROUTES.CHARTS,
         element: <Charts />,
+        children: [
+          {
+            index: true,
+            element: <CoreCharts />,
+          },
+          {
+            path: ROUTES.WORLD,
+            element: <MapCharts />,
+          },
+        ],
       },
       {
         path: "click",

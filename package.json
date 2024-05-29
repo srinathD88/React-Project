@@ -13,7 +13,10 @@
     "coverage": "vitest --ui --coverage"
   },
   "dependencies": {
+    "@highcharts/map-collection": "^2.1.0",
     "@reduxjs/toolkit": "^2.2.3",
+    "highcharts": "^11.4.3",
+    "highcharts-react-official": "^3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.2",

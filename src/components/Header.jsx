@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
 
 const Header = () => {
@@ -10,9 +10,9 @@ const Header = () => {
         </h2>
       </div>
       <nav>
-        <Link to={ROUTES.CONTEXT}>Context + Reducer</Link>
-        <Link to={ROUTES.REDUX}>Redux</Link>
-        <Link to={ROUTES.CHARTS}>Charts</Link>
+        <NavLink to={ROUTES.CONTEXT}>Context + Reducer</NavLink>
+        <NavLink to={ROUTES.REDUX}>Redux</NavLink>
+        <NavLink to={ROUTES.CHARTS}>Charts</NavLink>
       </nav>
     </div>
   );

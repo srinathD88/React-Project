@@ -1,16 +1,27 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import hcMore from "highcharts/highcharts-more";
+import data from "highcharts/modules/data";
+import exportData from "highcharts/modules/export-data";
 import exporting from "highcharts/modules/exporting";
+import offlineExporting from "highcharts/modules/offline-exporting";
 import patternFill from "highcharts/modules/pattern-fill";
-import HC_more from "highcharts/highcharts-more";
-import { memo } from "react";
+// import coloraxis from "highcharts/modules/coloraxis";
+
+import { forwardRef, memo } from "react";
 
 exporting(Highcharts);
 patternFill(Highcharts);
-HC_more(Highcharts);
+data(Highcharts);
+hcMore(Highcharts);
+exportData(Highcharts);
+offlineExporting(Highcharts);
+// coloraxis(Highcharts);
 
-const ChartElememt = ({ options }) => {
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
-};
+const ChartElememt = forwardRef(({ options }, ref) => {
+  return (
+    <HighchartsReact highcharts={Highcharts} options={options} ref={ref} />
+  );
+});
 
 export default memo(ChartElememt);

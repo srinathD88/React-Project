@@ -7,6 +7,9 @@ const MixCharts = () => {
       backgroundColor: "lightYellow",
       borderRadius: 20,
       borderWidth: 2,
+      zooming: {
+        type: "xy",
+      },
     },
     title: {
       text: "My chart",

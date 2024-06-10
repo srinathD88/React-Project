@@ -92,44 +92,11 @@ const Line = ({ chartRef }) => {
             },
           ],
           tooltip: {
-            shared: true,
-            useHTML: true,
-            backgroundColor: "#1e558b",
-            style: {
-              color: "white",
-            },
-            // formatter: function () {
-            //   const points = [];
-            //   this.points.forEach((point) => points.push(point.point.options));
-
-            //   const { low, q1, median, q3, high } = {
-            //     low: points[1].low,
-            //     q1: points[1].q1,
-            //     median: points[1].median,
-            //     q3: points[0].q3,
-            //     high: points[0].high,
-            //   };
-
-            //   const pointFormat = `<table>
-            //   <tr>
-            //   <td><b>${median}\xB0F</b> Average Temprature Anomaly</td>
-            //   </tr>
-            //   <tr>
-            //   <td><b>${q3}</b> to <b>${high}\xB0F</b> Possible Upper Range</td>
-            //   </tr>
-            //   <tr>
-            //   <td><b>${q1}</b> to <b>${q3}\xB0F</b> Likely</td>
-            //   </tr>
-            //   <tr>
-            //   <td><b>${low}</b> to <b>${q1}\xB0F</b> Possible Lower Range</td>
-            //   </tr>
-            //   </table>`;
-
-            //   return pointFormat;
-            // },
+            enabled: false,
           },
           plotOptions: {
             line: {
+              enableMouseTracking: false,
               marker: {
                 enabled: false,
               },

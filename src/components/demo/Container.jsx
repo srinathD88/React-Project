@@ -35,9 +35,9 @@ const Container = () => {
   const handleScreenshot = () => {
     try {
       // will send data to server and send image back
-      //   chartRef.current.chart.exportChart({
-      //     filename: "graph-chart",
-      //   });
+      // chartRef.current.chart.exportChart({
+      //   filename: "graph-chart",
+      // });
 
       // offline export, no API call
       chartRef.current.chart.exportChartLocal({

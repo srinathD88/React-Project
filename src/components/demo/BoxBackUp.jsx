@@ -61,86 +61,13 @@ const BoxType = ({ chartRef }) => {
             type: "boxplot",
             // plotBorderWidth: 1,
           },
-          // legend: {
-          //   enabled: true,
-          //   useHTML: true,
-          //   align: "right",
-          //   verticalAlign: "middle",
-          //   width: "15%",
-          //   //             title: {
-          //   //               text: `<div style=" width: 130px;
-          //   // "><img src="./box.png" style="width: 100%;
-          //   // object-fit: contain;
-          //   // background-repeat: no-repeat;
-          //   // height: auto;" /></div>`,
-          //   //             },
-          //   layout: "vertical",
-          //   labelFormatter: function () {
-          //     return "";
-          //   },
-          //   symbolWidth: 0,
-          //   symbolHeight: 0,
-          // },
           legend: {
             enabled: true,
             useHTML: true,
             align: "right",
             verticalAlign: "middle",
-            width: "20%",
-            x: 30,
-            y: 30,
-            margin: 30,
-
-            title: {
-              text: `<div style="position: relative;
-              right: 0px;
-              display: flex;
-              align-items: flex-end;
-              vertical-align: bottom;
-              flex-direction: column;
-              gap: 20px;">
-              <b>Percentiles</b> 
-              <div style="position: relative; height:180px; width: 1px; background: black">
-              <div style="position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);height:100px;width: 25px;background:linear-gradient(0deg, #3068ac 50%,#48a6e4 50%);">
-              <span style="position: absolute;
-              top: -5px;
-              left: -40px;">75%</span>
-              <span style="position: absolute;
-              top: 50%;
-              left: -40px;     transform: translateY(-50%);">50%</span>
-              <span style="position: absolute;
-              bottom: -5px;
-              left: -40px;">25%</span>
-              </div>
-              <span style="position: absolute;
-              top: -5px;
-              left: -50px;">95%</span>
-              <span style="position: absolute;
-              bottom: -5px;
-              left: -45px;">5%</span>
-              <span style="position: absolute;
-              top: -10px;
-              left: -10px;
-              height: 20px;
-              width: 1px;
-              background: black;
-              transform: rotate(90deg);"></span>
-              <span style="position: absolute;
-              bottom: -10px;
-              left: -10px;
-              height: 20px;
-              width: 1px;
-              background: black;
-              transform: rotate(90deg);"></span>
-              </div>
-              </div>`,
-              style: {
-                fontWeight: "normal",
-              },
-            },
+            width: "15%",
+            title: { text: "" },
             layout: "vertical",
             labelFormatter: function () {
               return "";
@@ -302,9 +229,9 @@ const BoxType = ({ chartRef }) => {
   return (
     <div className="box-chart">
       <ChartElememt options={options} ref={chartRef} />
-      {/* <div className="img">
+      <div className="img">
         <img src="box.png" />
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -53,13 +53,26 @@ const Spline = ({ chartRef }) => {
           },
           legend: {
             enabled: true,
+            useHTML: true,
             align: "right",
             verticalAlign: "middle",
-            title: { text: "Climatology" },
+            title: { text: "" },
             layout: "vertical",
-            // labelFormatter: function () {
-            //   return `<div>${this.name}</div>`;
-            // },
+            width: "30%",
+            y: 30,
+            margin: 30,
+            labelFormatter: function () {
+              return `<div>
+              <b>${this.name}</b>
+              <br>
+              <table>
+              <tr><td style="color:${this.color}; padding-right: 10px">\u2e3a</td>
+              <td>Avg Temprature Anamony</td></tr>
+              <tr><td style="color:${this.color}">\u25b2</td>
+              <td>Median</td></tr>
+              </table>
+              </div>`;
+            },
             itemCheckboxStyle: {
               width: "16px",
               height: "16px",
@@ -114,11 +127,15 @@ const Spline = ({ chartRef }) => {
           tooltip: {
             shared: true,
             useHTML: true,
+            backgroundColor: "#1e558b",
+            style: {
+              color: "white",
+            },
             // followPointer: true,
             snap: 200,
             headerFormat: "<table>",
             pointFormat:
-              '<tr><td style="color: {series.color}">{series.name} ' +
+              "<tr><td>{series.name} " +
               "</td>" +
               '<td style="text-align: right"><b>{point.x} \xB0F</b></td></tr>',
             footerFormat: "</table>",
@@ -156,6 +173,7 @@ const Spline = ({ chartRef }) => {
           },
           exporting: {
             enabled: false,
+            allowHTML: true,
           },
         };
 

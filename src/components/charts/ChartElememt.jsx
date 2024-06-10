@@ -6,7 +6,7 @@ import exportData from "highcharts/modules/export-data";
 import exporting from "highcharts/modules/exporting";
 import offlineExporting from "highcharts/modules/offline-exporting";
 import patternFill from "highcharts/modules/pattern-fill";
-// import coloraxis from "highcharts/modules/coloraxis";
+import coloraxis from "highcharts/modules/coloraxis";
 
 import { forwardRef, memo } from "react";
 
@@ -16,7 +16,7 @@ data(Highcharts);
 hcMore(Highcharts);
 exportData(Highcharts);
 offlineExporting(Highcharts);
-// coloraxis(Highcharts);
+coloraxis(Highcharts);
 
 const ChartElememt = forwardRef(({ options }, ref) => {
   return (

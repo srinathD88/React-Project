@@ -10,21 +10,35 @@ const BoxType = ({ chartRef }) => {
     const series = [
       {
         name: "Percentiles 1",
-        fillColor: "#48a6e4",
-        color: "#48a6e4",
+        // fillColor: "#48a6e4",
+        // color: "#48a6e4",
+        color: "transparent",
+        fillColor: {
+          linearGradient: {
+            x1: 0.5,
+            x2: 0.5,
+            y1: 1,
+            y2: 0,
+          },
+          stops: [
+            [0.5, "#3068ac"],
+            [0.5, "#48a6e4"],
+          ],
+        },
         data: [],
       },
-      {
-        name: "Percentiles 2",
-        fillColor: "#3068ac",
-        color: "#3068ac",
-        data: [],
-      },
+      // {
+      //   name: "Percentiles 2",
+      //   fillColor: "#3068ac",
+      //   color: "#3068ac",
+      //   data: [],
+      // },
     ];
     const xCategories = [];
 
     // Ignore first row
-    for (let i = 1; i < lines.length - 1; i++) {
+    for (let i = 1; i <= lines.length - 1; i++) {
+      console.log("index", i);
       const line = lines[i].split(",");
 
       const low = parseFloat(line[6]);
@@ -43,8 +57,8 @@ const BoxType = ({ chartRef }) => {
 
       const date = `${startDate} - ${endDate}`;
       xCategories.push(date);
-      series[0].data.push(box1);
-      series[1].data.push(box2);
+      series[0].data.push(box);
+      // series[1].data.push(box2);
     }
 
     return { series, xCategories };
@@ -223,6 +237,7 @@ const BoxType = ({ chartRef }) => {
               whiskerLength: "20%",
               whiskerColor: "black",
               stemColor: "black",
+              maxPointWidth: 40,
             },
           },
           tooltip: {
@@ -237,9 +252,9 @@ const BoxType = ({ chartRef }) => {
               this.points.forEach((point) => points.push(point.point.options));
 
               const { low, q1, median, q3, high } = {
-                low: points[1].low,
-                q1: points[1].q1,
-                median: points[1].median,
+                low: points[0].low,
+                q1: points[0].q1,
+                median: points[0].median,
                 q3: points[0].q3,
                 high: points[0].high,
               };

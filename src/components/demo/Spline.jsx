@@ -8,22 +8,104 @@ const Spline = ({ chartRef }) => {
     const lines = data.split("\n");
 
     const series = {};
-    // Ignore first row
-    for (let i = 1; i < lines.length - 1; i++) {
+    // Ignore first line as it is a column header row
+    for (let i = 1; i <= lines.length - 1; i++) {
       const [category, firCol, secCol] = lines[i].split(",");
 
       if (category && !series[category]) {
         series[category] = {
           name: category,
           data: [],
+          id: category,
         };
       }
 
-      series[category]?.data.push({
-        y: parseFloat(secCol),
-        x: parseFloat(firCol),
-      });
+      if (secCol === "" || secCol === undefined || secCol === null) {
+        const marker = `${category}_marker`;
+        if (!series[marker]) {
+          series[marker] = {
+            name: marker,
+            id: marker,
+            linkedTo: category,
+            marker: {
+              symbol: "triangle",
+            },
+            data: [],
+          };
+        }
+
+        series[marker].data.push({ y: 0, x: parseFloat(firCol) });
+      } else {
+        series[category]?.data.push({
+          y: parseFloat(secCol),
+          x: parseFloat(firCol),
+        });
+      }
     }
+
+    // series["marker1"] = {
+    //   linkedTo: "Salient Climatology",
+    //   lineWidth: 0,
+    //   marker: {
+    //     symbol: "triangle",
+    //   },
+    //   enableMouseTracking: false,
+    //   color: "rgb(44, 175, 254)",
+    //   data: [
+    //     {
+    //       x: -7,
+    //       y: 0,
+    //     },
+    //   ],
+    // };
+
+    // series["marker2"] = {
+    //   linkedTo: "Salient v8",
+    //   lineWidth: 0,
+    //   marker: {
+    //     symbol: "triangle",
+    //   },
+    //   enableMouseTracking: false,
+    //   color: "rgb(84, 79, 197)",
+    //   data: [
+    //     {
+    //       x: -2,
+    //       y: 0,
+    //     },
+    //   ],
+    // };
+
+    // series["marker3"] = {
+    //   linkedTo: "Salient v8",
+    //   lineWidth: 0,
+    //   marker: {
+    //     symbol: "triangle",
+    //   },
+    //   enableMouseTracking: false,
+    //   color: "gray",
+    //   data: [
+    //     {
+    //       x: 2,
+    //       y: 0,
+    //     },
+    //   ],
+    // };
+
+    // series["marker4"] = {
+    //   linkedTo: "Salient v8",
+    //   lineWidth: 0,
+    //   marker: {
+    //     symbol: "triangle",
+    //   },
+    //   enableMouseTracking: false,
+    //   color: "black",
+    //   data: [
+    //     {
+    //       x: 3,
+    //       y: 0,
+    //     },
+    //   ],
+    // };
     return { series };
   };
 
@@ -51,6 +133,7 @@ const Spline = ({ chartRef }) => {
               },
             },
           },
+          colors: ["rgb(44, 175, 254)", "rgb(84, 79, 197)"],
           legend: {
             enabled: true,
             useHTML: true,

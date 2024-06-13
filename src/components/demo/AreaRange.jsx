@@ -81,7 +81,7 @@ const AreaRange = ({ chartRef }) => {
     const xCategories = [];
 
     // Ignore first row
-    for (let i = 1; i < lines.length - 1; i++) {
+    for (let i = 1; i <= lines.length - 1; i++) {
       const line = lines[i].split(",");
 
       const date = new Date(line[4]).getTime();

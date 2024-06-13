@@ -44,14 +44,14 @@ const Container = () => {
         filename: "graph-chart",
       });
     } catch (err) {
-      console.log("Chart hasn't been rendered yet");
+      console.log("Screenshot download error", err);
     }
   };
-  const handleDownload = () => {
+  const handleCSVDownload = () => {
     try {
       chartRef.current.chart.downloadCSV();
     } catch (err) {
-      console.log("Chart hasn't been rendered yet");
+      console.log("CSV download error", err);
     }
   };
 
@@ -81,7 +81,7 @@ const Container = () => {
       <ContainerBody chartRef={chartRef} activeTab={activeTab} />
       <ContainerFooter
         handleScreenshot={handleScreenshot}
-        handleDownload={handleDownload}
+        handleDownload={handleCSVDownload}
       />
     </div>
   );

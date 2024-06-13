@@ -1,33 +1,8 @@
 import { useEffect, useState } from "react";
 import ChartElememt from "../charts/ChartElememt";
 
-const Line = ({ chartRef }) => {
+const HistoricTimeSeries = ({ chartRef }) => {
   const [options, setOptions] = useState(null);
-
-  const formatSeriesData = (data) => {
-    const lines = data.split("\n");
-
-    const series = [
-      {
-        name: "GFS Deterministic Forecast",
-        data: [],
-      },
-    ];
-    const xCategories = [];
-
-    // Ignore first row
-    for (let i = 1; i <= lines.length - 1; i++) {
-      const line = lines[i].split(",");
-
-      const date = new Date(line[4]).getTime();
-      const point = parseFloat(line[29]);
-
-      xCategories.push(date);
-      series[0].data.push(point);
-    }
-
-    return { series, xCategories };
-  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,6 +11,11 @@ const Line = ({ chartRef }) => {
     const getData = async () => {
       try {
         const chartData = {
+          chart: {
+            zooming: {
+              type: "x",
+            },
+          },
           legend: {
             enabled: true,
             useHTML: true,
@@ -44,34 +24,51 @@ const Line = ({ chartRef }) => {
             margin: 20,
             title: { text: "" },
             layout: "vertical",
+            labelFormatter: function () {
+              return "Temperature Anomaly";
+            },
           },
           title: {
-            text: "Forecast Time Series",
+            text: "Historical Time Series",
             align: "left",
             margin: 5,
           },
           subtitle: {
-            text: "<p><span><b>Location</b>: 48.5\xB0N 98.5\xB0W</span><span>&nbsp;&nbsp;<b>Model</b>: GFS</span>&nbsp;&nbsp;<span><b>Initialization Date</b>: 2024-02-30</span></p>",
+            text: "<p><span><b>Location</b>: 48.5\xB0N 98.5\xB0W</span><span>&nbsp;&nbsp;<b>Period</b>: Weekly</span>&nbsp;&nbsp;<span><b>Variable</b>: Temprature</span></p>",
             align: "left",
             useHTML: true,
             y: 30,
           },
           xAxis: {
-            type: "datetime",
+            // type: "datetime",
             title: {
-              text: "Hourly",
+              text: "Weekly",
               y: 10,
             },
             labels: {
-              format: "{value:%d/%m}",
+              //   format: "{value:%Y}",
+              formatter: function () {
+                console.log(this.value);
+                try {
+                  return this.value.split("-")[0];
+                } catch (err) {
+                  return new Date().getFullYear();
+                }
+              },
             },
             lineColor: "lightGray",
             gridLineWidth: 1,
+            tickLength: 0,
+            minPadding: 0,
+            maxPadding: 0,
+            tickInterval: 120,
+            showLastLabel: true,
+            endOnTick: true,
           },
           yAxis: [
             {
               title: {
-                text: "Average Daily Precipitation (in day-1)",
+                text: "Average Temprature Anomaly (\xB0F)",
                 x: -5,
               },
               labels: {
@@ -118,12 +115,20 @@ const Line = ({ chartRef }) => {
           },
         };
 
-        const response = await fetch("timeseries.csv", { signal });
+        const response = await fetch("historic.csv", { signal });
         const data = await response.text();
 
-        const { series, xCategories } = await formatSeriesData(data);
-        chartData["series"] = series;
-        chartData.xAxis["categories"] = xCategories;
+        chartData["data"] = {
+          csv: data,
+          seriesMapping: [
+            {
+              x: 0,
+              y: 1,
+              lat: 2,
+              lon: 3,
+            },
+          ],
+        };
 
         setOptions(chartData);
       } catch (error) {
@@ -145,4 +150,4 @@ const Line = ({ chartRef }) => {
   );
 };
 
-export default Line;
+export default HistoricTimeSeries;

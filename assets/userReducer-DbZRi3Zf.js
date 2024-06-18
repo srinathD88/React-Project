@@ -1,1 +1,0 @@
-import{x as r}from"./index-DKICf-qK.js";const t=null,a=r({name:"user",initialState:t,reducers:{login:(n,{payload:e})=>e,logout:()=>t}}),{actions:o,reducer:i}=a,{login:l,logout:c}=o;export{l as a,c as l,i as r};

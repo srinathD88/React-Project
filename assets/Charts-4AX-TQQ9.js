@@ -1,0 +1,1 @@
+import{j as s,N as r,R as t,O as e}from"./index-DKICf-qK.js";const n=()=>s.jsxs(s.Fragment,{children:[s.jsxs("nav",{children:[s.jsx(r,{to:t.CHARTS,children:"Core"}),"   ",s.jsx(r,{to:t.WORLD,children:"World"})]}),s.jsx(e,{})]});export{n as default};
